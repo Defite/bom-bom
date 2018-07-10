@@ -13,7 +13,7 @@
   "devDependencies": {},
   "scripts": {
     "bom_bom": "node index.js",
-    "lint": "eslint test --ext js",
+    "lint": "eslint example --ext js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "gen_bom": "cd example && printf '\\xEF\\xBB\\xBFunicorn' > new_with_bom.js"
   },

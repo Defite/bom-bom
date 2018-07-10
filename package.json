@@ -1,0 +1,26 @@
+{
+  "name": "bom-bom",
+  "version": "1.0.0",
+  "description": "Parse directory, find files with bom and remove bom from these files",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "eslint": "^5.1.0",
+    "strip-bom": "^3.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "bom_bom": "node index.js",
+    "lint": "eslint test --ext js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen_bom": "cd example && printf '\\xEF\\xBB\\xBFunicorn' > new_with_bom.js"
+  },
+  "keywords": [
+    "utf8",
+    "bom"
+  ],
+  "author": "Defite",
+  "license": "MIT"
+}

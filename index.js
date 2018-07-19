@@ -1,15 +1,69 @@
 const fs = require('fs');
+const path = require('path');
 const stripBom = require('strip-bom');
 
-const path = __dirname + '/example/with_bom.js';
+const customPath = path.resolve(__dirname, './example');
 
-fs.readFile(path, 'utf8', (err, contents) => {
-    console.log('Read file');
-
-    const newFileContents = stripBom(contents);
-
-    fs.writeFile(path, newFileContents, { encoding: 'utf8' }, (err) => {
-        if (err) throw err;
-        console.log('Done');
+/**
+ * Удаляет BOM из файла
+ * @param {String} filePath - абсолютный путь до файла
+ */
+const removeFileBom = (filePath) => {
+    fs.readFile(filePath, 'utf8', (err, contents) => {
+        console.log('Read file ', filePath);
+    
+        const newFileContents = stripBom(contents);
+    
+        fs.writeFile(filePath, newFileContents, { encoding: 'utf8' }, (err) => {
+            if (err) throw err;
+            console.log('Done ', filePath);
+        })
     })
-})
+}
+
+/**
+ * Прочитать содержимое директории рекурсивно
+ * @param {String} dir - Директория для чтения
+ * @param {callback} done -  Коллбэк по окончанию чтения директории
+ */
+const recurReadDir = (dir, done) => {
+    let results = [];
+
+    fs.readdir(dir, function(err, list) {
+        if (err) return done(err);
+
+        var pending = list.length;
+
+        if (!pending) return done(null, results);
+
+        list.forEach(function(file){
+            file = path.resolve(dir, file);
+
+            fs.stat(file, function(err, stat){
+                // If directory, execute a recursive call
+                if (stat && stat.isDirectory()) {
+                    // Add directory to array [comment if you need to remove the directories from the array]
+                    
+                    //results.push(file);
+
+                    recurReadDir(file, function(err, res){
+                        results = results.concat(res);
+                        if (!--pending) done(null, results);
+                    });
+                } else {
+                    results.push(file);
+                    if (!--pending) done(null, results);
+                }
+            });
+        });
+    });
+}
+
+// Lights, camera, action!
+recurReadDir(customPath, (err, data) => {
+    if (err) throw err;
+
+    data.forEach((file) => {
+        removeFileBom(file)
+    });
+});

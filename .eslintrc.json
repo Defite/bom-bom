@@ -1,0 +1,8 @@
+{
+    "rules": {
+        "unicode-bom": [
+            "error",
+            "never"
+        ]
+    }
+}

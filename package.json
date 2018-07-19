@@ -7,10 +7,11 @@
     "example": "example"
   },
   "dependencies": {
-    "eslint": "^5.1.0",
     "strip-bom": "^3.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^4.19.1"
+  },
   "scripts": {
     "bom_bom": "node index.js",
     "lint": "eslint example --ext js",

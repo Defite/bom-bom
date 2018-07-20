@@ -9,11 +9,11 @@ Parse directory, find files with bom and remove bom from these files
 
 `npm run bom_bom`
 
-Get files from targer dir and rewrite 'em w/o BOM. Hooray.
+Get files from target dir and rewrite 'em w/o BOM. Hooray.
 
 ## Check for BOM
 
-To be ensured that final file doesn't contain BOM, you can use eslint:
+To be ensured that final file/files doesn't contain BOM, you can use eslint:
 
 `npm run lint`
 

@@ -1,5 +1,14 @@
+# What is BOM, baby don't hurt me, no more...
+**BOM - Byte Order Mark** - is Unicode character (`U+FEFF`) which is placed at the start of the text stream. Its appearence at the start of the text stream means that:
+
+- the byte order of the text stream
+- the fact that text stream is encoded in Unicode
+- signals to a program which Unicode encoding the text stream is encoded
+
+[Read more about BOM](https://en.wikipedia.org/wiki/Byte_order_mark)
+
 # bom-bom
-Parse directory, find files with bom and remove bom from these files
+Parse directory, find files with bom and remove BOM from these files
 
 ## Install
 

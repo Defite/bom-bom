@@ -3,11 +3,21 @@ Parse directory, find files with bom and remove bom from these files
 
 ## Install
 
-`npm i`
+`npm i` or `yarn`
 
 ## Use
 
-`npm run bom_bom`
+This will simply scan target folder and recursively remove BOM from all files inside.
+
+`npm run bom_bom /myfolder/new_folder/` or
+
+`yarn bom_bom /myfolder/new_folder/`
+
+Sometimes you don't want to touch all files. You can provide extension of files which yon wanna cure.
+
+`npm run bom_bom /myfolder/new_folder/ .js` or
+
+`yarn bom_bom /myfolder/new_folder/ .js`
 
 Get files from target dir and rewrite 'em w/o BOM. Hooray.
 

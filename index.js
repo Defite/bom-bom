@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const stripBom = require('strip-bom');
-
-const customPath = path.resolve(__dirname, './example');
+const targetFolder =  process.argv[2];
+const targetExtension = process.argv[3];
 
 /**
  * Удаляет BOM из файла
@@ -43,8 +43,7 @@ const recurReadDir = (dir, done) => {
                 // If directory, execute a recursive call
                 if (stat && stat.isDirectory()) {
                     // Add directory to array [comment if you need to remove the directories from the array]
-                    
-                    //results.push(file);
+                    // results.push(file);
 
                     recurReadDir(file, function(err, res){
                         results = results.concat(res);
@@ -60,10 +59,19 @@ const recurReadDir = (dir, done) => {
 }
 
 // Lights, camera, action!
-recurReadDir(customPath, (err, data) => {
+recurReadDir(targetFolder, (err, data) => {
     if (err) throw err;
 
-    data.forEach((file) => {
+    data.filter(filterByExtension).forEach((file) => {
         removeFileBom(file)
     });
 });
+
+/**
+ * Отфильтровать файлы по заданному расширению
+ * @param {*} file 
+ */
+function filterByExtension(file) {
+    const extName = path.extname(file);
+    return extName === targetExtension;
+}
